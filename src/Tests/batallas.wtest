@@ -1,0 +1,48 @@
+import combates.*
+import equipos.*
+import luchadores.*
+
+
+describe "Gran batalla" {
+
+	fixture{
+		guerra.luchadores1(equipoUno)
+		guerra.luchadores2(equipoDos)
+	}
+
+	test "ganaElEquipo1" {
+
+		assert.that(guerra.lucha()==['Acá pasó la Pamela','Hora de cuidar a las plantas'])
+
+	}
+}
+
+describe "Luego de la gran batalla"{
+	
+	fixture{
+		guerra.luchadores1(equipoUno)
+		guerra.luchadores2(equipoDos)
+		guerra.lucha()	
+	}
+	
+	
+	test "Equipo1QuedaCon13600DeEnergia"{
+		assert.that(equipoUno.energiaDelEquipo()==13600)
+	}
+	
+	test "Equipo2QuedaCon7700DeEnergia"{
+		assert.that(equipoDos.energiaDelEquipo()==7700)
+	}
+	
+	test "ToroSeRoboAguaOxigenadaYUnaManguera"{
+		assert.that(toro.inventario()==['Agua oxigenada', 'Manguera'])
+	}
+	
+	test "PamelaPerdioElAgua"{
+		assert.notThat(pamela.inventario().last()== 'Agua oxigenada')
+	}
+	
+	test "TulipanPerdioLaManguera"{
+		assert.notThat(pamela.inventario().last()== 'Manguera')
+	}
+}
